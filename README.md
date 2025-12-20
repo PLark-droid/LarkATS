@@ -1,5 +1,7 @@
 # LarkATS
 
+Lark Baseを使用した採用管理システム（ATS: Applicant Tracking System）
+
 Autonomous development powered by **Miyabi** - AI-driven development framework.
 
 ## Getting Started
@@ -26,6 +28,7 @@ npm run build        # Build project
 npm test             # Run tests
 npm run typecheck    # Check types
 npm run lint         # Lint code
+npm run setup:ats    # Create ATS table in Lark Base
 ```
 
 ## Project Structure
@@ -97,6 +100,37 @@ Required variables (see `.env.example`):
 - `GITHUB_TOKEN` - GitHub personal access token
 - `ANTHROPIC_API_KEY` - Claude API key (optional for local development)
 - `REPOSITORY` - Format: `owner/repo`
+- `LARK_APP_ID` - Lark Open Platform App ID
+- `LARK_APP_SECRET` - Lark Open Platform App Secret
+- `LARK_BASE_APP_TOKEN` - Target Base App Token
+
+## Lark Base ATS
+
+### テーブル構成
+
+| フィールド名 | データ型 | 説明 |
+|------------|--------|------|
+| 担当CA名 | SingleSelect | キャリアアドバイザーの名前 |
+| 求職者氏名 | Text | 申請者の名前 |
+| 送客元 | SingleSelect | 紹介元チャネル（RDS、キミナラ等） |
+| 紹介企業名 | Text | 応募企業名 |
+| 選考ステップ | SingleSelect | 進捗状況（書類選考、一次面接、お見送り、面談） |
+| ヨミ | SingleSelect | 成約確度（A/B/C/ネタ） |
+| ネクストアクション | Text | 次のステップ内容 |
+| 初回面談日 | DateTime | 面談実施日 |
+| 入社承諾日 | DateTime | 承諾日 |
+| 入社日 | DateTime | 入社予定日 |
+| 決定年収 | Number | 合意年収（万円） |
+| 現職（企業） | Text | 現在の勤務先 |
+| 現職種 | Text | 現在の職種 |
+| 希望職種 | Text | 志望職種 |
+
+### セットアップ
+
+1. [Lark Open Platform](https://open.larksuite.com/)でアプリを作成
+2. Base APIの権限を追加
+3. `.env`にLark認証情報を設定
+4. `npm run setup:ats`でテーブルを作成
 
 ### GitHub Actions
 

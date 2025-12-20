@@ -8,7 +8,9 @@
     "build": "tsc",
     "test": "vitest",
     "lint": "eslint . --ext .ts,.tsx",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "setup:ats": "tsx src/lark/create-ats-table.ts",
+    "lark:create-table": "tsx src/lark/create-ats-table.ts"
   },
   "keywords": [
     "agentic-os",
@@ -16,7 +18,10 @@
   ],
   "author": "",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "^1.55.0",
+    "dotenv": "^17.2.3"
+  },
   "devDependencies": {
     "@types/node": "^20.10.0",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
